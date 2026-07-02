@@ -5,3 +5,4 @@ node_modules/
 
 # Playwright 生成的预览截图
 preview-*.png
+battle-test-*
