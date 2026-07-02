@@ -2,7 +2,7 @@
 
 > 所有组件的可复制 HTML 代码块汇总。AI 读一个文件即可获取全部组件的全部变体。
 > Light mode 为主，暗色模式在需要时从完整文档补充。
-> 最后更新：2026-07-02 · 27 个组件
+> 最后更新：2026-07-02 · 27 个组件（Card Footer 正式化）
 
 ---
 
@@ -284,6 +284,19 @@
   <p class="text-xs font-medium uppercase tracking-wider text-gray-500">Total Revenue</p>
   <p class="mt-2 text-3xl font-semibold tracking-tight text-gray-900">$48,292</p>
   <p class="mt-1 text-sm text-gray-500"><span class="text-green-600 font-medium">↑ 12.5%</span> from last month</p>
+</div>
+
+<!-- Card with Section (Header / Body / Footer) -->
+<div class="overflow-hidden rounded-xl bg-white inset-ring inset-ring-gray-950/8 dark:bg-gray-950 dark:inset-ring-white/10">
+  <div class="border-b border-gray-950/5 px-5 py-4 sm:px-6 dark:border-white/5">
+    <h3 class="text-base font-semibold text-gray-900 dark:text-gray-100">Card Header</h3>
+    <p class="mt-0.5 text-xs text-gray-500 dark:text-gray-400">Optional description</p>
+  </div>
+  <div class="px-5 py-4 sm:px-6"><!-- Body content --></div>
+  <div class="flex items-center justify-end gap-3 border-t border-gray-950/5 px-5 py-3 sm:px-6 dark:border-white/5">
+    <button type="button" class="inline-flex items-center justify-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-gray-700 transition-colors duration-150 hover:bg-gray-950/[2.5%] hover:text-gray-900 active:scale-[0.97] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-900 dark:text-gray-400 dark:hover:bg-white/[2.5%] dark:hover:text-white motion-reduce:transition-none">Cancel</button>
+    <button type="button" class="inline-flex items-center justify-center gap-2 rounded-lg bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white transition-colors duration-150 hover:bg-indigo-700 active:scale-[0.97] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:bg-indigo-500 dark:hover:bg-indigo-400 dark:focus-visible:outline-indigo-400 motion-reduce:transition-none">Save</button>
+  </div>
 </div>
 
 <!-- Card Grid (3 columns) -->

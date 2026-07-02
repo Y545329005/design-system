@@ -520,8 +520,8 @@ Page (gray-50)
 
   <!-- Footer -->
   <div class="flex items-center justify-end gap-3 border-t border-gray-950/5 px-5 py-3 sm:px-6 dark:border-white/5">
-    <button class="...">Cancel</button>
-    <button class="...">Save</button>
+    <button type="button" class="inline-flex items-center justify-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-gray-700 transition-colors duration-150 hover:bg-gray-950/[2.5%] hover:text-gray-900 active:scale-[0.97] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-900 disabled:cursor-not-allowed disabled:opacity-50 dark:text-gray-400 dark:hover:bg-white/[2.5%] dark:hover:text-white motion-reduce:transition-none">Cancel</button>
+    <button type="button" class="inline-flex items-center justify-center gap-2 rounded-lg bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white transition-colors duration-150 hover:bg-indigo-700 active:scale-[0.97] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-indigo-500 dark:hover:bg-indigo-400 dark:focus-visible:outline-indigo-400 motion-reduce:transition-none">Save</button>
   </div>
 </div>
 ```
@@ -529,6 +529,34 @@ Page (gray-50)
 **设计要点：**
 - 分隔线使用 `border-gray-950/5`——透明度方案，比 `gray-200` 更轻
 - Footer 按钮右对齐——操作区自然流向
+- Footer 按钮直接引用 [Button](./button.md) 组件样式：Cancel 为 Ghost，Save/Confirm 为 Primary
+- Footer padding `px-5 py-3 sm:px-6`——比 Body 略紧凑，视觉上与内容区区分
+- 按钮间距 `gap-3` (12px)——Primary 与 Ghost 之间的呼吸感
+
+### Card Footer 使用模式
+
+```html
+<!-- 标准 Footer: Ghost + Primary -->
+<div class="flex items-center justify-end gap-3 border-t border-gray-950/5 px-5 py-3 sm:px-6 dark:border-white/5">
+  <button type="button" class="inline-flex items-center justify-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-gray-700 transition-colors duration-150 hover:bg-gray-950/[2.5%] hover:text-gray-900 active:scale-[0.97] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-900 dark:text-gray-400 dark:hover:bg-white/[2.5%] dark:hover:text-white motion-reduce:transition-none">Cancel</button>
+  <button type="button" class="inline-flex items-center justify-center gap-2 rounded-lg bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white transition-colors duration-150 hover:bg-indigo-700 active:scale-[0.97] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:bg-indigo-500 dark:hover:bg-indigo-400 dark:focus-visible:outline-indigo-400 motion-reduce:transition-none">Save</button>
+</div>
+
+<!-- Danger Footer: Ghost + Danger -->
+<div class="flex items-center justify-end gap-3 border-t border-gray-950/5 px-5 py-3 sm:px-6 dark:border-white/5">
+  <button type="button" class="inline-flex items-center justify-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-gray-700 transition-colors duration-150 hover:bg-gray-950/[2.5%] hover:text-gray-900 active:scale-[0.97] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-900 dark:text-gray-400 dark:hover:bg-white/[2.5%] dark:hover:text-white motion-reduce:transition-none">Cancel</button>
+  <button type="button" class="inline-flex items-center justify-center gap-2 rounded-lg bg-red-600 px-4 py-2.5 text-sm font-semibold text-white transition-colors duration-150 hover:bg-red-700 active:scale-[0.97] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600 dark:bg-red-500 dark:hover:bg-red-400 dark:focus-visible:outline-red-400 motion-reduce:transition-none">Delete</button>
+</div>
+
+<!-- Footer with left-aligned secondary action -->
+<div class="flex items-center justify-between border-t border-gray-950/5 px-5 py-3 sm:px-6 dark:border-white/5">
+  <button type="button" class="inline-flex items-center justify-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-red-600 transition-colors duration-150 hover:bg-red-50 hover:text-red-700 active:scale-[0.97] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600 dark:text-red-400 dark:hover:bg-red-900/30 dark:hover:text-red-300 motion-reduce:transition-none">Delete project</button>
+  <div class="flex items-center gap-3">
+    <button type="button" class="inline-flex items-center justify-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-gray-700 transition-colors duration-150 hover:bg-gray-950/[2.5%] hover:text-gray-900 active:scale-[0.97] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-900 dark:text-gray-400 dark:hover:bg-white/[2.5%] dark:hover:text-white motion-reduce:transition-none">Cancel</button>
+    <button type="button" class="inline-flex items-center justify-center gap-2 rounded-lg bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white transition-colors duration-150 hover:bg-indigo-700 active:scale-[0.97] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:bg-indigo-500 dark:hover:bg-indigo-400 dark:focus-visible:outline-indigo-400 motion-reduce:transition-none">Save</button>
+  </div>
+</div>
+```
 
 ---
 

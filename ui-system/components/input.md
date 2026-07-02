@@ -366,6 +366,100 @@
 - 暗色模式 `inset-ring-red-400/50` — 暗背景上降低红色饱和度
 - `aria-invalid="true"` + `aria-describedby` + `role="alert"` — 完整的可访问错误关联
 
+### Error 状态变体
+
+#### Inline Error（行内错误）
+
+错误消息直接显示在输入框下方——最常用的模式。
+
+```html
+<div class="flex flex-col gap-1.5">
+  <label for="email-err" class="text-sm font-medium text-gray-900 dark:text-gray-100">Email</label>
+  <input type="email" id="email-err" value="not-an-email"
+    class="w-full rounded-lg bg-white px-3 py-2 text-sm/6 text-gray-900 inset-ring inset-ring-red-500 placeholder:text-gray-400 transition-colors duration-150 focus:inset-ring-red-600 focus:ring-2 focus:ring-red-500/10 focus:outline-none dark:bg-gray-900 dark:text-gray-100 dark:inset-ring-red-400/50 dark:focus:inset-ring-red-400 dark:focus:ring-red-400/20 motion-reduce:transition-none"
+    aria-invalid="true" aria-describedby="email-err-msg" />
+  <p id="email-err-msg" class="text-xs text-red-600 dark:text-red-400" role="alert">Please enter a valid email address.</p>
+</div>
+```
+
+#### Icon + Error（带图标的错误输入框）
+
+左侧图标保持不变，右侧增加错误图标——双重视觉提示。
+
+```html
+<div class="flex flex-col gap-1.5">
+  <label for="email-icon-err" class="text-sm font-medium text-gray-900 dark:text-gray-100">Email</label>
+  <div class="relative">
+    <!-- Left icon -->
+    <svg class="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-gray-400 dark:text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+    </svg>
+    <input type="email" id="email-icon-err" value="bad-email"
+      class="w-full rounded-lg bg-white py-2 pl-10 pr-10 text-sm/6 text-gray-900 inset-ring inset-ring-red-500 placeholder:text-gray-400 transition-colors duration-150 focus:inset-ring-red-600 focus:ring-2 focus:ring-red-500/10 focus:outline-none dark:bg-gray-900 dark:text-gray-100 dark:inset-ring-red-400/50 dark:focus:inset-ring-red-400 dark:focus:ring-red-400/20 motion-reduce:transition-none"
+      aria-invalid="true" aria-describedby="email-icon-err-msg" />
+    <!-- Right error icon -->
+    <svg class="pointer-events-none absolute right-3 top-1/2 size-4 -translate-y-1/2 text-red-500 dark:text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+    </svg>
+  </div>
+  <p id="email-icon-err-msg" class="text-xs text-red-600 dark:text-red-400" role="alert">Please enter a valid email.</p>
+</div>
+```
+
+#### Multiple Field Errors（多字段错误）
+
+表单提交后多个字段同时显示错误——常见于注册/设置页。
+
+```html
+<!-- Form with multiple errors -->
+<div class="flex flex-col gap-4">
+  <!-- Name field - error -->
+  <div class="flex flex-col gap-1.5">
+    <label for="name-err" class="text-sm font-medium text-gray-900 dark:text-gray-100">Full name</label>
+    <input type="text" id="name-err" value=""
+      class="w-full rounded-lg bg-white px-3 py-2 text-sm/6 text-gray-900 inset-ring inset-ring-red-500 placeholder:text-gray-400 transition-colors duration-150 focus:inset-ring-red-600 focus:ring-2 focus:ring-red-500/10 focus:outline-none dark:bg-gray-900 dark:text-gray-100 dark:inset-ring-red-400/50 dark:focus:inset-ring-red-400 dark:focus:ring-red-400/20 motion-reduce:transition-none"
+      aria-invalid="true" aria-describedby="name-err-msg" />
+    <p id="name-err-msg" class="text-xs text-red-600 dark:text-red-400" role="alert">Name is required.</p>
+  </div>
+  <!-- Email field - error -->
+  <div class="flex flex-col gap-1.5">
+    <label for="email2-err" class="text-sm font-medium text-gray-900 dark:text-gray-100">Email</label>
+    <input type="email" id="email2-err" value="invalid"
+      class="w-full rounded-lg bg-white px-3 py-2 text-sm/6 text-gray-900 inset-ring inset-ring-red-500 placeholder:text-gray-400 transition-colors duration-150 focus:inset-ring-red-600 focus:ring-2 focus:ring-red-500/10 focus:outline-none dark:bg-gray-900 dark:text-gray-100 dark:inset-ring-red-400/50 dark:focus:inset-ring-red-400 dark:focus:ring-red-400/20 motion-reduce:transition-none"
+      aria-invalid="true" aria-describedby="email2-err-msg" />
+    <p id="email2-err-msg" class="text-xs text-red-600 dark:text-red-400" role="alert">Valid email required.</p>
+  </div>
+  <!-- Password field - valid (no error) -->
+  <div class="flex flex-col gap-1.5">
+    <label for="pw-ok" class="text-sm font-medium text-gray-900 dark:text-gray-100">Password</label>
+    <input type="password" id="pw-ok" value="correct-value"
+      class="w-full rounded-lg bg-white px-3 py-2 text-sm/6 text-gray-900 inset-ring inset-ring-gray-950/8 placeholder:text-gray-400 transition-colors duration-150 focus:inset-ring-gray-950/20 focus:ring-2 focus:ring-gray-950/10 focus:outline-none dark:bg-gray-900 dark:text-gray-100 dark:inset-ring-white/10 dark:focus:inset-ring-white/20 dark:focus:ring-white/10 motion-reduce:transition-none" />
+  </div>
+</div>
+```
+
+#### Server Error Banner（服务端错误横幅）
+
+表单顶部的全局错误提示——不适合逐字段展示的错误（如 "用户已存在"、"网络错误"）。
+
+```html
+<!-- Server error banner above form fields -->
+<div class="rounded-lg bg-red-50 px-4 py-3 inset-ring inset-ring-red-300 dark:bg-red-950/30 dark:inset-ring-red-800" role="alert">
+  <div class="flex items-start gap-2">
+    <svg class="mt-0.5 size-4 shrink-0 text-red-600 dark:text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+    </svg>
+    <div>
+      <p class="text-sm font-medium text-red-800 dark:text-red-300">There was a problem with your submission</p>
+      <ul class="mt-1 list-inside list-disc text-xs text-red-700 dark:text-red-400">
+        <li>A user with this email already exists.</li>
+        <li>Password must be at least 8 characters.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+```
+
 ### Disabled 状态
 
 ```html

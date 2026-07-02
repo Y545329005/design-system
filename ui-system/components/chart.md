@@ -252,13 +252,46 @@
       <span class="text-xs tabular-nums text-gray-500 dark:text-gray-400">0</span>
     </div>
     <div class="flex flex-1 items-end gap-4 border-b border-gray-950/10 px-1 pb-6 dark:border-white/10" style="height: 200px;">
-      <!-- Jan: Revenue + Cost -->
+      <!-- Jan: Revenue $8.2k + Cost $6.0k -->
       <div class="flex flex-1 items-end justify-center gap-1">
         <div class="w-3 rounded-t-sm bg-indigo-600 transition-colors duration-150 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-400 motion-reduce:transition-none" style="height: 41%;" aria-label="Jan Revenue: $8,200"></div>
         <div class="w-3 rounded-t-sm bg-emerald-500 transition-colors duration-150 hover:bg-emerald-600 dark:bg-emerald-400 dark:hover:bg-emerald-300 motion-reduce:transition-none" style="height: 30%;" aria-label="Jan Cost: $6,000"></div>
       </div>
-      <!-- Repeat per month... -->
+      <!-- Feb: Revenue $10.5k + Cost $7.2k -->
+      <div class="flex flex-1 items-end justify-center gap-1">
+        <div class="w-3 rounded-t-sm bg-indigo-600 transition-colors duration-150 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-400 motion-reduce:transition-none" style="height: 52%;" aria-label="Feb Revenue: $10,500"></div>
+        <div class="w-3 rounded-t-sm bg-emerald-500 transition-colors duration-150 hover:bg-emerald-600 dark:bg-emerald-400 dark:hover:bg-emerald-300 motion-reduce:transition-none" style="height: 36%;" aria-label="Feb Cost: $7,200"></div>
+      </div>
+      <!-- Mar: Revenue $12.0k + Cost $8.1k -->
+      <div class="flex flex-1 items-end justify-center gap-1">
+        <div class="w-3 rounded-t-sm bg-indigo-600 transition-colors duration-150 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-400 motion-reduce:transition-none" style="height: 60%;" aria-label="Mar Revenue: $12,000"></div>
+        <div class="w-3 rounded-t-sm bg-emerald-500 transition-colors duration-150 hover:bg-emerald-600 dark:bg-emerald-400 dark:hover:bg-emerald-300 motion-reduce:transition-none" style="height: 40%;" aria-label="Mar Cost: $8,100"></div>
+      </div>
+      <!-- Apr: Revenue $9.8k + Cost $7.5k -->
+      <div class="flex flex-1 items-end justify-center gap-1">
+        <div class="w-3 rounded-t-sm bg-indigo-600 transition-colors duration-150 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-400 motion-reduce:transition-none" style="height: 49%;" aria-label="Apr Revenue: $9,800"></div>
+        <div class="w-3 rounded-t-sm bg-emerald-500 transition-colors duration-150 hover:bg-emerald-600 dark:bg-emerald-400 dark:hover:bg-emerald-300 motion-reduce:transition-none" style="height: 37%;" aria-label="Apr Cost: $7,500"></div>
+      </div>
+      <!-- May: Revenue $14.3k + Cost $9.2k -->
+      <div class="flex flex-1 items-end justify-center gap-1">
+        <div class="w-3 rounded-t-sm bg-indigo-600 transition-colors duration-150 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-400 motion-reduce:transition-none" style="height: 71%;" aria-label="May Revenue: $14,300"></div>
+        <div class="w-3 rounded-t-sm bg-emerald-500 transition-colors duration-150 hover:bg-emerald-600 dark:bg-emerald-400 dark:hover:bg-emerald-300 motion-reduce:transition-none" style="height: 46%;" aria-label="May Cost: $9,200"></div>
+      </div>
+      <!-- Jun: Revenue $16.1k + Cost $10.0k -->
+      <div class="flex flex-1 items-end justify-center gap-1">
+        <div class="w-3 rounded-t-sm bg-indigo-600 transition-colors duration-150 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-400 motion-reduce:transition-none" style="height: 80%;" aria-label="Jun Revenue: $16,100"></div>
+        <div class="w-3 rounded-t-sm bg-emerald-500 transition-colors duration-150 hover:bg-emerald-600 dark:bg-emerald-400 dark:hover:bg-emerald-300 motion-reduce:transition-none" style="height: 50%;" aria-label="Jun Cost: $10,000"></div>
+      </div>
     </div>
+  </div>
+  <!-- X Axis Labels -->
+  <div class="ml-10 flex gap-4 px-1 pt-2">
+    <span class="flex-1 text-center text-xs text-gray-500 dark:text-gray-400">Jan</span>
+    <span class="flex-1 text-center text-xs text-gray-500 dark:text-gray-400">Feb</span>
+    <span class="flex-1 text-center text-xs text-gray-500 dark:text-gray-400">Mar</span>
+    <span class="flex-1 text-center text-xs text-gray-500 dark:text-gray-400">Apr</span>
+    <span class="flex-1 text-center text-xs text-gray-500 dark:text-gray-400">May</span>
+    <span class="flex-1 text-center text-xs text-gray-500 dark:text-gray-400">Jun</span>
   </div>
   <!-- Legend -->
   <div class="ml-10 mt-3 flex items-center gap-4">
