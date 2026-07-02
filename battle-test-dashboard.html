@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Acme Inc — 项目管理</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<!-- Prevent FOUC (Flash of Unstyled Content) for dark mode -->
+<script>
+  (function() {
+    const theme = localStorage.getItem('theme');
+    if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark');
+    }
+  })();
+</script>
+<style>
+  @keyframes indeterminate {
+    0%   { translate: -100%; }
+    100% { translate: 300%; }
+  }
+</style>
+</head>
+<body class="min-h-screen bg-gray-50 dark:bg-gray-900">
+
+<!-- ============================================================ -->
+<!-- Sidebar                                                        -->
+<!-- ============================================================ -->
+<aside class="fixed left-0 top-0 z-40 flex h-full w-60 flex-col border-r border-gray-950/5 bg-white dark:bg-gray-950 dark:border-white/5">
+  <!-- Logo -->
+  <div class="flex h-14 items-center gap-2 px-4 border-b border-gray-950/5 dark:border-white/5">
+    <span class="size-7 rounded-lg bg-indigo-600 flex items-center justify-center text-white font-semibold text-sm">A</span>
+    <span class="text-sm font-semibold text-gray-900 dark:text-white">Acme Inc</span>
+  </div>
+
+  <!-- Nav Items -->
+  <nav class="flex-1 overflow-y-auto p-3">
+    <div class="flex flex-col gap-1">
+      <a href="#" class="flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-indigo-600 bg-indigo-50 transition-colors duration-150 dark:text-indigo-400 dark:bg-indigo-500/10 motion-reduce:transition-none">
+        <svg class="size-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955a1.126 1.126 0 011.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"/></svg>
+        Dashboard
+      </a>
+      <a href="#" class="flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-gray-700 transition-colors duration-150 hover:bg-gray-50 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-white motion-reduce:transition-none">
+        <svg class="size-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5M12 17.25h8.25"/></svg>
+        Projects
+      </a>
+      <a href="#" class="flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-gray-700 transition-colors duration-150 hover:bg-gray-50 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-white motion-reduce:transition-none">
+        <svg class="size-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/></svg>
+        Team
+      </a>
+      <a href="#" class="flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-gray-700 transition-colors duration-150 hover:bg-gray-50 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-white motion-reduce:transition-none">
+        <svg class="size-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        Timeline
+      </a>
+      <a href="#" class="flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-gray-700 transition-colors duration-150 hover:bg-gray-50 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-white motion-reduce:transition-none">
+        <svg class="size-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        Settings
+      </a>
+    </div>
+  </nav>
+
+  <!-- Sidebar Footer -->
+  <div class="border-t border-gray-950/5 dark:border-white/5 p-3">
+    <div class="flex items-center gap-3 rounded-lg px-3 py-2">
+      <span class="size-7 rounded-full bg-indigo-600 flex items-center justify-center text-xs font-medium text-white">YQ</span>
+      <div class="flex-1 min-w-0">
+        <p class="text-sm font-medium text-gray-900 dark:text-white truncate">Yang Qing</p>
+        <p class="text-xs text-gray-500 dark:text-gray-400 truncate">yang@acme.com</p>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<!-- ============================================================ -->
+<!-- Main Content                                                   -->
+<!-- ============================================================ -->
+<main class="ml-60 min-h-screen">
+
+<!-- Top Navbar -->
+<header class="sticky top-0 z-30 bg-white/80 backdrop-blur-md border-b border-gray-950/5 dark:bg-gray-950/80 dark:border-white/5">
+  <div class="flex h-14 items-center justify-between px-6">
+    <!-- Breadcrumb -->
+    <nav aria-label="Breadcrumb" class="flex items-center gap-1.5 text-sm">
+      <a href="/" class="text-gray-500 transition-colors duration-150 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 motion-reduce:transition-none">Home</a>
+      <span class="text-gray-400 select-none" aria-hidden="true">/</span>
+      <a href="/projects" class="text-gray-500 transition-colors duration-150 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 motion-reduce:transition-none">Projects</a>
+      <span class="text-gray-400 select-none" aria-hidden="true">/</span>
+      <span class="text-gray-900 font-medium dark:text-white" aria-current="page">Dashboard</span>
+    </nav>
+
+    <!-- Right Actions -->
+    <div class="flex items-center gap-2">
+      <!-- Search -->
+      <div class="relative">
+        <svg class="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/></svg>
+        <input type="search" placeholder="Search..." class="w-64 rounded-lg bg-white py-2 pl-10 pr-3 text-sm/6 text-gray-900 inset-ring inset-ring-gray-950/8 placeholder:text-gray-400 transition-colors duration-150 focus:inset-ring-gray-950/20 focus:ring-2 focus:ring-gray-950/10 focus:outline-none dark:bg-gray-800 dark:text-white dark:inset-ring-white/10 dark:placeholder:text-gray-500 motion-reduce:transition-none" />
+      </div>
+
+      <!-- Dark Mode Toggle -->
+      <button type="button" onclick="toggleTheme()" class="inline-flex items-center justify-center rounded-lg p-2.5 text-gray-700 transition-colors duration-150 hover:bg-gray-950/[2.5%] hover:text-gray-900 dark:text-gray-400 dark:hover:bg-white/[2.5%] dark:hover:text-white motion-reduce:transition-none" aria-label="Toggle theme">
+        <svg class="size-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z"/></svg>
+      </button>
+
+      <!-- Notification -->
+      <button type="button" class="relative inline-flex items-center justify-center rounded-lg p-2.5 text-gray-700 transition-colors duration-150 hover:bg-gray-950/[2.5%] hover:text-gray-900 dark:text-gray-400 dark:hover:bg-white/[2.5%] dark:hover:text-white motion-reduce:transition-none" aria-label="Notifications">
+        <svg class="size-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0"/></svg>
+        <span class="absolute top-1.5 right-1.5 size-2 rounded-full bg-red-500" aria-label="New notifications"></span>
+      </button>
+
+      <!-- User Avatar -->
+      <div class="relative inline-flex ml-2">
+        <span class="inline-flex items-center justify-center size-8 rounded-full bg-indigo-600 text-xs font-medium text-white" aria-label="Yang Qing">YQ</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Page Content -->
+<div class="p-6 space-y-6">
+
+  <!-- ====== Tabs ====== -->
+  <nav class="flex border-b border-gray-950/5 dark:border-white/5" role="tablist" aria-label="Content sections">
+    <button role="tab" aria-selected="true" aria-controls="panel-overview"
+      class="relative px-4 py-2.5 text-sm font-medium text-gray-900 transition-colors duration-150 hover:text-gray-700 dark:text-white dark:hover:text-gray-300 motion-reduce:transition-none">
+      Overview
+      <span class="absolute inset-x-0 -bottom-px h-0.5 bg-indigo-600 dark:bg-indigo-400" aria-hidden="true"></span>
+    </button>
+    <button role="tab" aria-selected="false" aria-controls="panel-analytics"
+      class="relative px-4 py-2.5 text-sm font-medium text-gray-500 transition-colors duration-150 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 motion-reduce:transition-none">
+      Analytics
+    </button>
+    <button role="tab" aria-selected="false" aria-controls="panel-settings"
+      class="relative px-4 py-2.5 text-sm font-medium text-gray-500 transition-colors duration-150 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 motion-reduce:transition-none">
+      Settings
+    </button>
+  </nav>
+
+  <!-- ====== Stat Cards Grid ====== -->
+  <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+    <!-- Stat Card 1 -->
+    <div class="rounded-xl bg-white inset-ring inset-ring-gray-950/8 p-6 dark:bg-gray-950 dark:inset-ring-white/10">
+      <p class="text-xs font-medium uppercase tracking-wider text-gray-500 dark:text-gray-400">Total Projects</p>
+      <p class="mt-2 text-3xl font-semibold tracking-tight text-gray-900 dark:text-white">24</p>
+      <p class="mt-1 text-sm text-gray-500 dark:text-gray-400"><span class="text-green-600 dark:text-green-400 font-medium">↑ 12.5%</span> from last month</p>
+    </div>
+    <!-- Stat Card 2 -->
+    <div class="rounded-xl bg-white inset-ring inset-ring-gray-950/8 p-6 dark:bg-gray-950 dark:inset-ring-white/10">
+      <p class="text-xs font-medium uppercase tracking-wider text-gray-500 dark:text-gray-400">Team Members</p>
+      <p class="mt-2 text-3xl font-semibold tracking-tight text-gray-900 dark:text-white">18</p>
+      <p class="mt-1 text-sm text-gray-500 dark:text-gray-400"><span class="text-green-600 dark:text-green-400 font-medium">↑ 3</span> this quarter</p>
+    </div>
+    <!-- Stat Card 3 -->
+    <div class="rounded-xl bg-white inset-ring inset-ring-gray-950/8 p-6 dark:bg-gray-950 dark:inset-ring-white/10">
+      <p class="text-xs font-medium uppercase tracking-wider text-gray-500 dark:text-gray-400">Completion Rate</p>
+      <p class="mt-2 text-3xl font-semibold tracking-tight text-gray-900 dark:text-white">78%</p>
+      <p class="mt-1 text-sm text-gray-500 dark:text-gray-400"><span class="text-amber-600 dark:text-amber-400 font-medium">↓ 2.1%</span> from last month</p>
+    </div>
+    <!-- Stat Card 4 -->
+    <div class="rounded-xl bg-white inset-ring inset-ring-gray-950/8 p-6 dark:bg-gray-950 dark:inset-ring-white/10">
+      <p class="text-xs font-medium uppercase tracking-wider text-gray-500 dark:text-gray-400">Overdue Tasks</p>
+      <p class="mt-2 text-3xl font-semibold tracking-tight text-gray-900 dark:text-white">7</p>
+      <p class="mt-1 text-sm text-gray-500 dark:text-gray-400"><span class="text-red-600 dark:text-red-400 font-medium">↑ 4</span> needs attention</p>
+    </div>
+  </div>
+
+  <!-- ====== Segmented Control + Table Card ====== -->
+  <div class="rounded-xl bg-white inset-ring inset-ring-gray-950/8 dark:bg-gray-950 dark:inset-ring-white/10">
+    <!-- Card Header -->
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 px-6 pt-6">
+      <h3 class="text-lg font-semibold tracking-tight text-gray-900 dark:text-white">Active Projects</h3>
+      <div class="inline-flex rounded-lg bg-gray-950/[2.5%] p-1 dark:bg-white/[2.5%]" role="radiogroup" aria-label="Filter by status">
+        <button role="radio" aria-checked="true"
+          class="rounded-md px-3 py-1.5 text-sm font-medium text-gray-900 bg-white inset-ring inset-ring-gray-950/8 transition-colors duration-150 dark:bg-gray-700 dark:text-white dark:inset-ring-white/10 motion-reduce:transition-none">All</button>
+        <button role="radio" aria-checked="false"
+          class="rounded-md px-3 py-1.5 text-sm font-medium text-gray-500 transition-colors duration-150 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 motion-reduce:transition-none">Active</button>
+        <button role="radio" aria-checked="false"
+          class="rounded-md px-3 py-1.5 text-sm font-medium text-gray-500 transition-colors duration-150 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 motion-reduce:transition-none">Draft</button>
+        <button role="radio" aria-checked="false"
+          class="rounded-md px-3 py-1.5 text-sm font-medium text-gray-500 transition-colors duration-150 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 motion-reduce:transition-none">Archived</button>
+      </div>
+    </div>
+
+    <!-- Table -->
+    <div class="overflow-x-auto mt-4">
+      <table class="w-full text-left text-sm">
+        <thead>
+          <tr class="border-b border-gray-950/5 dark:border-white/5">
+            <th class="px-6 py-3 text-xs font-medium uppercase tracking-wider text-gray-500 dark:text-gray-400">Project</th>
+            <th class="px-6 py-3 text-xs font-medium uppercase tracking-wider text-gray-500 dark:text-gray-400">Status</th>
+            <th class="px-6 py-3 text-xs font-medium uppercase tracking-wider text-gray-500 dark:text-gray-400">Team</th>
+            <th class="px-6 py-3 text-xs font-medium uppercase tracking-wider text-gray-500 dark:text-gray-400">Progress</th>
+            <th class="px-6 py-3 text-xs font-medium uppercase tracking-wider text-gray-500 dark:text-gray-400"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Row 1 -->
+          <tr class="border-b border-gray-950/5 dark:border-white/5 transition-colors duration-150 hover:bg-gray-50/50 dark:hover:bg-white/[2.5%] motion-reduce:transition-none">
+            <td class="px-6 py-4">
+              <div class="flex items-center gap-3">
+                <span class="size-8 rounded-lg bg-indigo-100 dark:bg-indigo-500/20 flex items-center justify-center text-xs font-semibold text-indigo-600 dark:text-indigo-400">RS</span>
+                <div>
+                  <p class="text-gray-900 dark:text-white font-medium">Redesign System</p>
+                  <p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Design · v2.0</p>
+                </div>
+              </div>
+            </td>
+            <td class="px-6 py-4"><span class="inline-flex items-center rounded-lg bg-green-50 px-2 py-0.5 text-xs font-medium text-green-700 dark:bg-green-500/10 dark:text-green-400">Active</span></td>
+            <td class="px-6 py-4">
+              <div class="flex items-center -space-x-2">
+                <span class="relative inline-flex items-center justify-center size-7 rounded-full bg-indigo-600 text-[10px] font-medium text-white inset-ring inset-ring-2 inset-ring-white dark:inset-ring-gray-950">LW</span>
+                <span class="relative inline-flex items-center justify-center size-7 rounded-full bg-amber-500 text-[10px] font-medium text-white inset-ring inset-ring-2 inset-ring-white dark:inset-ring-gray-950">CH</span>
+                <span class="relative inline-flex items-center justify-center size-7 rounded-full bg-gray-100 text-[10px] font-medium text-gray-600 inset-ring inset-ring-2 inset-ring-white dark:bg-gray-800 dark:text-gray-400 dark:inset-ring-gray-950">+2</span>
+              </div>
+            </td>
+            <td class="px-6 py-4">
+              <div class="w-28">
+                <div class="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400 mb-1">
+                  <span>85%</span>
+                </div>
+                <div role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"
+                  class="h-2 rounded-full bg-gray-200 dark:bg-gray-700">
+                  <div class="h-full rounded-full bg-green-500 transition-all duration-300 ease-in-out motion-reduce:transition-none" style="width:85%"></div>
+                </div>
+              </div>
+            </td>
+            <td class="px-6 py-4">
+              <div class="flex items-center gap-1">
+                <button type="button" class="rounded-lg p-1.5 text-gray-400 transition-colors duration-150 hover:bg-gray-100 hover:text-gray-600 dark:hover:bg-white/10 dark:hover:text-gray-300 motion-reduce:transition-none" aria-label="Edit">
+                  <svg class="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+                </button>
+                <div class="relative">
+                  <button type="button" onclick="this.nextElementSibling.hidden = !this.nextElementSibling.hidden" class="rounded-lg p-1.5 text-gray-400 transition-colors duration-150 hover:bg-gray-100 hover:text-gray-600 dark:hover:bg-white/10 dark:hover:text-gray-300 motion-reduce:transition-none" aria-label="More">
+                    <svg class="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z"/></svg>
+                  </button>
+                  <div hidden role="menu" class="absolute right-0 top-full z-30 mt-2 w-44 rounded-xl bg-white p-1 inset-ring inset-ring-gray-950/8 shadow-lg dark:bg-gray-800 dark:inset-ring-white/10">
+                    <button role="menuitem" class="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm text-gray-700 transition-colors duration-150 hover:bg-gray-950/[2.5%] hover:text-gray-900 dark:text-gray-300 dark:hover:bg-white/[2.5%] dark:hover:text-white motion-reduce:transition-none">
+                      <svg class="size-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"/></svg>
+                      Edit
+                    </button>
+                    <div class="my-1 h-px bg-gray-950/5 dark:bg-white/5" role="separator"></div>
+                    <button role="menuitem" class="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm text-red-600 transition-colors duration-150 hover:bg-red-50 hover:text-red-700 dark:text-red-400 dark:hover:bg-red-900/30 dark:hover:text-red-300 motion-reduce:transition-none">
+                      <svg class="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"/></svg>
+                      Delete
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Row 2 -->
+          <tr class="border-b border-gray-950/5 dark:border-white/5 transition-colors duration-150 hover:bg-gray-50/50 dark:hover:bg-white/[2.5%] motion-reduce:transition-none">
+            <td class="px-6 py-4">
+              <div class="flex items-center gap-3">
+                <span class="size-8 rounded-lg bg-blue-100 dark:bg-blue-500/20 flex items-center justify-center text-xs font-semibold text-blue-600 dark:text-blue-400">MP</span>
+                <div>
+                  <p class="text-gray-900 dark:text-white font-medium">Mobile Payments</p>
+                  <p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Engineering · Sprint 6</p>
+                </div>
+              </div>
+            </td>
+            <td class="px-6 py-4"><span class="inline-flex items-center rounded-lg bg-green-50 px-2 py-0.5 text-xs font-medium text-green-700 dark:bg-green-500/10 dark:text-green-400">Active</span></td>
+            <td class="px-6 py-4">
+              <div class="flex items-center -space-x-2">
+                <span class="relative inline-flex items-center justify-center size-7 rounded-full bg-emerald-500 text-[10px] font-medium text-white inset-ring inset-ring-2 inset-ring-white dark:inset-ring-gray-950">TK</span>
+                <span class="relative inline-flex items-center justify-center size-7 rounded-full bg-violet-500 text-[10px] font-medium text-white inset-ring inset-ring-2 inset-ring-white dark:inset-ring-gray-950">JM</span>
+                <span class="relative inline-flex items-center justify-center size-7 rounded-full bg-rose-500 text-[10px] font-medium text-white inset-ring inset-ring-2 inset-ring-white dark:inset-ring-gray-950">AR</span>
+              </div>
+            </td>
+            <td class="px-6 py-4">
+              <div class="w-28">
+                <div class="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400 mb-1">
+                  <span>42%</span>
+                </div>
+                <div role="progressbar" aria-valuenow="42" aria-valuemin="0" aria-valuemax="100"
+                  class="h-2 rounded-full bg-gray-200 dark:bg-gray-700">
+                  <div class="h-full rounded-full bg-indigo-600 transition-all duration-300 ease-in-out motion-reduce:transition-none" style="width:42%"></div>
+                </div>
+              </div>
+            </td>
+            <td class="px-6 py-4">
+              <div class="flex items-center gap-1">
+                <button type="button" class="rounded-lg p-1.5 text-gray-400 transition-colors duration-150 hover:bg-gray-100 hover:text-gray-600 dark:hover:bg-white/10 dark:hover:text-gray-300 motion-reduce:transition-none" aria-label="Edit">
+                  <svg class="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+                </button>
+                <button type="button" class="rounded-lg p-1.5 text-gray-400 transition-colors duration-150 hover:bg-red-100 hover:text-red-600 dark:hover:bg-red-500/20 dark:hover:text-red-400 motion-reduce:transition-none" aria-label="Delete">
+                  <svg class="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+                </button>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Row 3 - Warning -->
+          <tr class="border-b border-gray-950/5 dark:border-white/5 transition-colors duration-150 hover:bg-gray-50/50 dark:hover:bg-white/[2.5%] motion-reduce:transition-none">
+            <td class="px-6 py-4">
+              <div class="flex items-center gap-3">
+                <span class="size-8 rounded-lg bg-amber-100 dark:bg-amber-500/20 flex items-center justify-center text-xs font-semibold text-amber-600 dark:text-amber-400">AP</span>
+                <div>
+                  <p class="text-gray-900 dark:text-white font-medium">Analytics Platform</p>
+                  <p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Data · Delayed</p>
+                </div>
+              </div>
+            </td>
+            <td class="px-6 py-4"><span class="inline-flex items-center rounded-lg bg-amber-50 px-2 py-0.5 text-xs font-medium text-amber-700 dark:bg-amber-500/10 dark:text-amber-400">Pending</span></td>
+            <td class="px-6 py-4">
+              <div class="flex items-center -space-x-2">
+                <span class="relative inline-flex items-center justify-center size-7 rounded-full bg-indigo-600 text-[10px] font-medium text-white inset-ring inset-ring-2 inset-ring-white dark:inset-ring-gray-950">YQ</span>
+                <span class="relative inline-flex items-center justify-center size-7 rounded-full bg-gray-100 text-[10px] font-medium text-gray-600 inset-ring inset-ring-2 inset-ring-white dark:bg-gray-800 dark:text-gray-400 dark:inset-ring-gray-950">+1</span>
+              </div>
+            </td>
+            <td class="px-6 py-4">
+              <div class="w-28">
+                <div class="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400 mb-1">
+                  <span>68%</span>
+                </div>
+                <div role="progressbar" aria-valuenow="68" aria-valuemin="0" aria-valuemax="100"
+                  class="h-2 rounded-full bg-gray-200 dark:bg-gray-700">
+                  <div class="h-full rounded-full bg-amber-500 transition-all duration-300 ease-in-out motion-reduce:transition-none" style="width:68%"></div>
+                </div>
+              </div>
+            </td>
+            <td class="px-6 py-4">
+              <div class="flex items-center gap-1">
+                <button type="button" class="rounded-lg p-1.5 text-gray-400 transition-colors duration-150 hover:bg-gray-100 hover:text-gray-600 dark:hover:bg-white/10 dark:hover:text-gray-300 motion-reduce:transition-none" aria-label="Edit">
+                  <svg class="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+                </button>
+                <button type="button" class="rounded-lg p-1.5 text-gray-400 transition-colors duration-150 hover:bg-red-100 hover:text-red-600 dark:hover:bg-red-500/20 dark:hover:text-red-400 motion-reduce:transition-none" aria-label="Delete">
+                  <svg class="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+                </button>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Row 4 -->
+          <tr class="border-b border-gray-950/5 dark:border-white/5 transition-colors duration-150 hover:bg-gray-50/50 dark:hover:bg-white/[2.5%] motion-reduce:transition-none">
+            <td class="px-6 py-4">
+              <div class="flex items-center gap-3">
+                <span class="size-8 rounded-lg bg-green-100 dark:bg-green-500/20 flex items-center justify-center text-xs font-semibold text-green-600 dark:text-green-400">CP</span>
+                <div>
+                  <p class="text-gray-900 dark:text-white font-medium">Customer Portal</p>
+                  <p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Frontend · Completed</p>
+                </div>
+              </div>
+            </td>
+            <td class="px-6 py-4"><span class="inline-flex items-center rounded-lg bg-green-50 px-2 py-0.5 text-xs font-medium text-green-700 dark:bg-green-500/10 dark:text-green-400">Active</span></td>
+            <td class="px-6 py-4">
+              <div class="flex items-center -space-x-2">
+                <span class="relative inline-flex items-center justify-center size-7 rounded-full bg-indigo-600 text-[10px] font-medium text-white inset-ring inset-ring-2 inset-ring-white dark:inset-ring-gray-950">LW</span>
+                <span class="relative inline-flex items-center justify-center size-7 rounded-full bg-cyan-500 text-[10px] font-medium text-white inset-ring inset-ring-2 inset-ring-white dark:inset-ring-gray-950">SB</span>
+              </div>
+            </td>
+            <td class="px-6 py-4">
+              <div class="w-28">
+                <div class="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400 mb-1">
+                  <span>100%</span>
+                </div>
+                <div role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"
+                  class="h-2 rounded-full bg-gray-200 dark:bg-gray-700">
+                  <div class="h-full rounded-full bg-green-500 transition-all duration-300 ease-in-out motion-reduce:transition-none" style="width:100%"></div>
+                </div>
+              </div>
+            </td>
+            <td class="px-6 py-4">
+              <div class="flex items-center gap-1">
+                <button type="button" class="rounded-lg p-1.5 text-gray-400 transition-colors duration-150 hover:bg-gray-100 hover:text-gray-600 dark:hover:bg-white/10 dark:hover:text-gray-300 motion-reduce:transition-none" aria-label="Edit">
+                  <svg class="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+                </button>
+                <button type="button" class="rounded-lg p-1.5 text-gray-400 transition-colors duration-150 hover:bg-red-100 hover:text-red-600 dark:hover:bg-red-500/20 dark:hover:text-red-400 motion-reduce:transition-none" aria-label="Delete">
+                  <svg class="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+                </button>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Row 5 - Overdue -->
+          <tr class="transition-colors duration-150 hover:bg-gray-50/50 dark:hover:bg-white/[2.5%] motion-reduce:transition-none">
+            <td class="px-6 py-4">
+              <div class="flex items-center gap-3">
+                <span class="size-8 rounded-lg bg-red-100 dark:bg-red-500/20 flex items-center justify-center text-xs font-semibold text-red-600 dark:text-red-400">IB</span>
+                <div>
+                  <p class="text-gray-900 dark:text-white font-medium">Integrations Backbone</p>
+                  <p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Platform · Overdue</p>
+                </div>
+              </div>
+            </td>
+            <td class="px-6 py-4"><span class="inline-flex items-center rounded-lg bg-red-50 px-2 py-0.5 text-xs font-medium text-red-700 dark:bg-red-500/10 dark:text-red-400">Overdue</span></td>
+            <td class="px-6 py-4">
+              <div class="flex items-center -space-x-2">
+                <span class="relative inline-flex items-center justify-center size-7 rounded-full bg-indigo-600 text-[10px] font-medium text-white inset-ring inset-ring-2 inset-ring-white dark:inset-ring-gray-950">JM</span>
+                <span class="relative inline-flex items-center justify-center size-7 rounded-full bg-amber-500 text-[10px] font-medium text-white inset-ring inset-ring-2 inset-ring-white dark:inset-ring-gray-950">CH</span>
+                <span class="relative inline-flex items-center justify-center size-7 rounded-full bg-emerald-500 text-[10px] font-medium text-white inset-ring inset-ring-2 inset-ring-white dark:inset-ring-gray-950">TK</span>
+                <span class="relative inline-flex items-center justify-center size-7 rounded-full bg-gray-100 text-[10px] font-medium text-gray-600 inset-ring inset-ring-2 inset-ring-white dark:bg-gray-800 dark:text-gray-400 dark:inset-ring-gray-950">+1</span>
+              </div>
+            </td>
+            <td class="px-6 py-4">
+              <div class="w-28">
+                <div class="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400 mb-1">
+                  <span>92%</span>
+                </div>
+                <div role="progressbar" aria-valuenow="92" aria-valuemin="0" aria-valuemax="100"
+                  class="h-2 rounded-full bg-gray-200 dark:bg-gray-700">
+                  <div class="h-full rounded-full bg-red-500 transition-all duration-300 ease-in-out motion-reduce:transition-none" style="width:92%"></div>
+                </div>
+              </div>
+            </td>
+            <td class="px-6 py-4">
+              <div class="flex items-center gap-1">
+                <button type="button" class="rounded-lg p-1.5 text-gray-400 transition-colors duration-150 hover:bg-gray-100 hover:text-gray-600 dark:hover:bg-white/10 dark:hover:text-gray-300 motion-reduce:transition-none" aria-label="Edit">
+                  <svg class="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+                </button>
+                <button type="button" class="rounded-lg p-1.5 text-gray-400 transition-colors duration-150 hover:bg-red-100 hover:text-red-600 dark:hover:bg-red-500/20 dark:hover:text-red-400 motion-reduce:transition-none" aria-label="Delete">
+                  <svg class="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Pagination -->
+    <nav class="flex items-center justify-between border-t border-gray-950/5 dark:border-white/5 px-6 py-3" aria-label="Pagination">
+      <p class="text-sm text-gray-500 dark:text-gray-400">Showing <span class="font-medium">1</span> to <span class="font-medium">5</span> of <span class="font-medium">24</span> results</p>
+      <div class="flex items-center gap-1">
+        <button type="button" class="inline-flex items-center justify-center rounded-lg p-2 text-gray-500 transition-colors duration-150 hover:bg-gray-100 hover:text-gray-700 disabled:opacity-50 disabled:cursor-not-allowed dark:hover:bg-white/5 dark:hover:text-gray-300 motion-reduce:transition-none" disabled aria-label="Previous">
+          <svg class="size-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5"/></svg>
+        </button>
+        <span class="inline-flex items-center justify-center rounded-lg bg-indigo-600 px-3 py-2 text-sm font-semibold text-white min-w-[36px]">1</span>
+        <button type="button" class="inline-flex items-center justify-center rounded-lg px-3 py-2 text-sm font-medium text-gray-700 transition-colors duration-150 hover:bg-gray-100 hover:text-gray-900 min-w-[36px] dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-white motion-reduce:transition-none">2</button>
+        <button type="button" class="inline-flex items-center justify-center rounded-lg px-3 py-2 text-sm font-medium text-gray-700 transition-colors duration-150 hover:bg-gray-100 hover:text-gray-900 min-w-[36px] dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-white motion-reduce:transition-none">3</button>
+        <button type="button" class="inline-flex items-center justify-center rounded-lg p-2 text-gray-500 transition-colors duration-150 hover:bg-gray-100 hover:text-gray-700 dark:hover:bg-white/5 dark:hover:text-gray-300 motion-reduce:transition-none" aria-label="Next">
+          <svg class="size-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
+        </button>
+      </div>
+    </nav>
+  </div>
+
+  <!-- ====== Bottom Row: Loading Card + Activity ====== -->
+  <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
+    <!-- Skeleton Loading Card -->
+    <div class="rounded-xl bg-white p-6 inset-ring inset-ring-gray-950/8 dark:bg-gray-950 dark:inset-ring-white/10">
+      <div class="h-48 bg-gray-200 rounded-lg animate-pulse motion-reduce:animate-none dark:bg-gray-700"></div>
+      <div class="mt-5 space-y-3">
+        <div class="h-5 w-[60%] bg-gray-200 rounded-lg animate-pulse motion-reduce:animate-none dark:bg-gray-700"></div>
+        <div class="h-4 bg-gray-200 rounded-lg animate-pulse motion-reduce:animate-none dark:bg-gray-700"></div>
+        <div class="h-4 w-[75%] bg-gray-200 rounded-lg animate-pulse motion-reduce:animate-none dark:bg-gray-700"></div>
+      </div>
+    </div>
+
+    <!-- Recent Activity Card -->
+    <div class="rounded-xl bg-white inset-ring inset-ring-gray-950/8 p-6 dark:bg-gray-950 dark:inset-ring-white/10">
+      <h3 class="text-lg font-semibold tracking-tight text-gray-900 dark:text-white">Recent Activity</h3>
+
+      <!-- Activity Item 1 -->
+      <div class="mt-4 flex items-start gap-3">
+        <span class="relative inline-flex shrink-0">
+          <span class="inline-flex items-center justify-center size-8 rounded-full bg-indigo-600 text-xs font-medium text-white">LW</span>
+          <span class="absolute bottom-0 right-0 size-3 rounded-full bg-green-500 inset-ring inset-ring-2 inset-ring-white dark:inset-ring-gray-950" aria-label="Online"></span>
+        </span>
+        <div class="flex-1 min-w-0">
+          <p class="text-sm text-gray-900 dark:text-white"><span class="font-medium">Lindsay Walton</span> completed <span class="font-medium">Customer Portal</span></p>
+          <p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">2 hours ago</p>
+        </div>
+      </div>
+
+      <!-- Activity Item 2 -->
+      <div class="mt-4 flex items-start gap-3">
+        <span class="relative inline-flex shrink-0">
+          <span class="inline-flex items-center justify-center size-8 rounded-full bg-amber-500 text-xs font-medium text-white">CH</span>
+        </span>
+        <div class="flex-1 min-w-0">
+          <p class="text-sm text-gray-900 dark:text-white"><span class="font-medium">Courtney Henry</span> commented on <span class="font-medium">Analytics Platform</span></p>
+          <p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">5 hours ago</p>
+        </div>
+      </div>
+
+      <!-- Activity Item 3 -->
+      <div class="mt-4 flex items-start gap-3">
+        <span class="relative inline-flex shrink-0">
+          <span class="inline-flex items-center justify-center size-8 rounded-full bg-emerald-500 text-xs font-medium text-white">TK</span>
+        </span>
+        <div class="flex-1 min-w-0">
+          <p class="text-sm text-gray-900 dark:text-white"><span class="font-medium">Tom Kim</span> opened <span class="font-medium">Mobile Payments</span> Sprint 6</p>
+          <p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Yesterday</p>
+        </div>
+      </div>
+
+      <!-- Activity Item 4 -->
+      <div class="mt-4 flex items-start gap-3">
+        <span class="relative inline-flex shrink-0">
+          <span class="inline-flex items-center justify-center size-8 rounded-full bg-violet-500 text-xs font-medium text-white">JM</span>
+        </span>
+        <div class="flex-1 min-w-0">
+          <p class="text-sm text-gray-900 dark:text-white"><span class="font-medium">Jessica Moore</span> uploaded 12 files to <span class="font-medium">Redesign System</span></p>
+          <p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">2 days ago</p>
+        </div>
+      </div>
+
+      <!-- View All -->
+      <div class="mt-5 pt-4 border-t border-gray-950/5 dark:border-white/5">
+        <button type="button" class="inline-flex items-center justify-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-gray-700 transition-colors duration-150 hover:bg-gray-950/[2.5%] hover:text-gray-900 dark:text-gray-400 dark:hover:bg-white/[2.5%] dark:hover:text-white motion-reduce:transition-none">
+          View all activity
+          <svg class="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /page-content -->
+</main>
+
+<!-- Theme Toggle Script -->
+<script>
+function toggleTheme() {
+  const html = document.documentElement;
+  if (html.classList.contains('dark')) {
+    html.classList.remove('dark');
+    localStorage.setItem('theme', 'light');
+  } else {
+    html.classList.add('dark');
+    localStorage.setItem('theme', 'dark');
+  }
+}
+
+// Close dropdowns on outside click
+document.addEventListener('click', function(e) {
+  if (!e.target.closest('[aria-label="More"]')) {
+    document.querySelectorAll('[role="menu"]').forEach(m => m.hidden = true);
+  }
+});
+</script>
+</body>
+</html>
