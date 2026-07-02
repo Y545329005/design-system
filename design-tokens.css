@@ -1,0 +1,138 @@
+/* ============================================================
+   Design Tokens — 跨项目可执行 Tailwind CSS 配置
+   基于 ui-system/design-tokens/ 完整导出
+   用途：新项目 @import 或复制到项目中即可使用
+   ============================================================ */
+
+/* === 品牌色 (Indigo) === */
+:root {
+  --color-brand: #4F46E5;
+  --color-brand-hover: #4338CA;
+  --color-brand-active: #3730A3;
+  --color-brand-subtle: #EEF2FF;
+  --color-brand-light: #E0E7FF;
+  --color-brand-outline: #A5B4FC;
+  --color-brand-text: #4F46E5;
+  --color-brand-on-solid: #ffffff;
+  --color-brand-ring: rgba(79, 70, 229, 0.25);
+
+  /* === 中性色 === */
+  --color-neutral-50: #f9fafb;
+  --color-neutral-100: #f3f4f6;
+  --color-neutral-200: #e5e7eb;
+  --color-neutral-300: #d1d5db;
+  --color-neutral-400: #9ca3af;
+  --color-neutral-500: #6b7280;
+  --color-neutral-600: #4b5563;
+  --color-neutral-700: #374151;
+  --color-neutral-800: #1f2937;
+  --color-neutral-900: #111827;
+  --color-neutral-950: #030712;
+
+  /* === 语义色 === */
+  --color-success-bg: #F0FDF4;
+  --color-success-text: #15803D;
+  --color-success-border: #86EFAC;
+  --color-warning-bg: #FFFBEB;
+  --color-warning-text: #B45309;
+  --color-warning-border: #FCD34D;
+  --color-error-bg: #FEF2F2;
+  --color-error-text: #DC2626;
+  --color-error-border: #FCA5A5;
+  --color-info-bg: #EFF6FF;
+  --color-info-text: #1D4ED8;
+  --color-info-border: #93C5FD;
+
+  /* === 页面层次 === */
+  --color-page-bg: #f9fafb;
+  --color-surface: #ffffff;
+
+  /* === 文字色层级 === */
+  --color-text-primary: #111827;
+  --color-text-body: #374151;
+  --color-text-secondary: #6b7280;
+  --color-text-disabled: #9ca3af;
+  --color-text-on-brand: #ffffff;
+  --color-text-link: #4F46E5;
+  --color-text-error: #DC2626;
+
+  /* === 透明度层次 === */
+  --transparent-2-5: rgba(0, 0, 0, 0.025);
+  --transparent-5: rgba(0, 0, 0, 0.05);
+  --transparent-8: rgba(0, 0, 0, 0.08);
+  --transparent-10: rgba(0, 0, 0, 0.10);
+  --transparent-20: rgba(0, 0, 0, 0.20);
+  --transparent-50: rgba(0, 0, 0, 0.50);
+
+  /* === 圆角 === */
+  --radius-none: 0;
+  --radius-sm: 2px;
+  --radius-md: 6px;
+  --radius-interactive: 8px;   /* 按钮、输入框、Badge */
+  --radius-container: 12px;    /* 卡片、Modal */
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+
+  /* === 间距基准 === */
+  --space-unit: 4px;           /* 1 unit = 4px = 0.25rem */
+
+  /* === 动效 === */
+  --duration-instant: 150ms;   /* Hover/Focus 反馈 */
+  --duration-smooth: 200ms;    /* 退出/消失 */
+  --duration-slow: 300ms;      /* 大面积过渡 */
+
+  /* === 字体 === */
+  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+
+  /* === 字号 === */
+  --text-xs: 12px;
+  --text-sm: 14px;
+  --text-base: 16px;
+  --text-lg: 18px;
+  --text-xl: 20px;
+  --text-2xl: 24px;
+  --text-3xl: 30px;
+  --text-4xl: 36px;
+  --text-5xl: 48px;
+
+  /* === 字重 === */
+  --weight-normal: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+
+  /* === 响应式断点 === */
+  --bp-sm: 640px;
+  --bp-md: 768px;
+  --bp-lg: 1024px;
+  --bp-xl: 1280px;
+  --bp-2xl: 1536px;
+}
+
+/* === 暗色模式覆盖 === */
+.dark {
+  --color-brand: #6366F1;
+  --color-brand-hover: #818CF8;
+  --color-brand-active: #A5B4FC;
+  --color-brand-subtle: #1E1B4B;
+  --color-brand-light: rgba(49, 46, 129, 0.3);
+  --color-brand-text: #818CF8;
+
+  --color-page-bg: #030712;
+  --color-surface: #111827;
+
+  --color-text-primary: #F3F4F6;
+  --color-text-body: #D1D5DB;
+  --color-text-secondary: #9CA3AF;
+  --color-text-disabled: #6B7280;
+}
+
+/* === Reduced Motion === */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition-duration: 0s !important;
+    animation-duration: 0s !important;
+  }
+}

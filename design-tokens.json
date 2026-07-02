@@ -1,0 +1,103 @@
+{
+  "$schema": "https://design-tokens.github.io/endorsed-tokens/token-schema.json",
+  "name": "Design System Tokens",
+  "version": "1.0.0",
+  "description": "跨项目可复用的 Design Token JSON 导出。用于 Style Dictionary 或其他工具链。",
+  "brand": {
+    "color": {
+      "primary": { "value": "#4F46E5", "type": "color", "description": "品牌基准色" },
+      "hover": { "value": "#4338CA", "type": "color", "description": "hover 态" },
+      "active": { "value": "#3730A3", "type": "color", "description": "active 态" },
+      "subtle": { "value": "#EEF2FF", "type": "color", "description": "最浅背景" },
+      "light": { "value": "#E0E7FF", "type": "color", "description": "浅背景" },
+      "outline": { "value": "#A5B4FC", "type": "color", "description": "边框" },
+      "text": { "value": "#4F46E5", "type": "color", "description": "品牌色文字" },
+      "onSolid": { "value": "#ffffff", "type": "color", "description": "实心背景上的文字色" }
+    }
+  },
+  "neutral": {
+    "50": { "value": "#f9fafb", "type": "color" },
+    "100": { "value": "#f3f4f6", "type": "color" },
+    "200": { "value": "#e5e7eb", "type": "color" },
+    "300": { "value": "#d1d5db", "type": "color" },
+    "400": { "value": "#9ca3af", "type": "color" },
+    "500": { "value": "#6b7280", "type": "color" },
+    "600": { "value": "#4b5563", "type": "color" },
+    "700": { "value": "#374151", "type": "color" },
+    "800": { "value": "#1f2937", "type": "color" },
+    "900": { "value": "#111827", "type": "color" },
+    "950": { "value": "#030712", "type": "color" }
+  },
+  "semantic": {
+    "success": { "bg": { "value": "#F0FDF4", "type": "color" }, "text": { "value": "#15803D", "type": "color" }, "border": { "value": "#86EFAC", "type": "color" } },
+    "warning": { "bg": { "value": "#FFFBEB", "type": "color" }, "text": { "value": "#B45309", "type": "color" }, "border": { "value": "#FCD34D", "type": "color" } },
+    "error": { "bg": { "value": "#FEF2F2", "type": "color" }, "text": { "value": "#DC2626", "type": "color" }, "border": { "value": "#FCA5A5", "type": "color" } },
+    "info": { "bg": { "value": "#EFF6FF", "type": "color" }, "text": { "value": "#1D4ED8", "type": "color" }, "border": { "value": "#93C5FD", "type": "color" } }
+  },
+  "elevation": {
+    "page": { "bg": { "value": "#f9fafb", "type": "color" } },
+    "card": { "bg": { "value": "#ffffff", "type": "color" }, "ring": { "value": "inset 0 0 0 1px rgba(0,0,0,0.08)", "type": "boxShadow" } },
+    "cardHover": { "bg": { "value": "rgba(249,250,251,0.5)", "type": "color" }, "ring": { "value": "inset 0 0 0 1px rgba(0,0,0,0.20)", "type": "boxShadow" } },
+    "modal": { "ring": { "value": "inset 0 0 0 1px rgba(0,0,0,0.30)", "type": "boxShadow" } },
+    "formDefault": { "ring": { "value": "inset 0 0 0 1px rgba(0,0,0,0.08)", "type": "boxShadow" } },
+    "formFocus": { "ring": { "value": "inset 0 0 0 1px rgba(0,0,0,0.20)", "type": "boxShadow" } },
+    "formDisabled": { "ring": { "value": "inset 0 0 0 1px rgba(0,0,0,0.05)", "type": "boxShadow" } }
+  },
+  "radius": {
+    "none": { "value": "0", "type": "borderRadius" },
+    "sm": { "value": "2px", "type": "borderRadius" },
+    "md": { "value": "6px", "type": "borderRadius" },
+    "interactive": { "value": "8px", "type": "borderRadius", "description": "Button/Input/Badge" },
+    "container": { "value": "12px", "type": "borderRadius", "description": "Card/Modal" },
+    "full": { "value": "9999px", "type": "borderRadius" }
+  },
+  "spacing": {
+    "unit": { "value": "4px", "type": "dimension", "description": "1 unit = 4px" },
+    "xs": { "value": "4px", "type": "dimension" },
+    "sm": { "value": "8px", "type": "dimension" },
+    "md": { "value": "12px", "type": "dimension" },
+    "lg": { "value": "16px", "type": "dimension" },
+    "xl": { "value": "24px", "type": "dimension" },
+    "2xl": { "value": "32px", "type": "dimension" },
+    "3xl": { "value": "48px", "type": "dimension" },
+    "4xl": { "value": "64px", "type": "dimension" },
+    "section": { "value": "96px", "type": "dimension" }
+  },
+  "motion": {
+    "duration": {
+      "instant": { "value": "150ms", "type": "duration", "description": "Hover/Focus 反馈" },
+      "smooth": { "value": "200ms", "type": "duration", "description": "退出/消失" },
+      "slow": { "value": "300ms", "type": "duration", "description": "大面积过渡" }
+    }
+  },
+  "typography": {
+    "fontFamily": {
+      "sans": { "value": "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif", "type": "fontFamily" },
+      "mono": { "value": "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace", "type": "fontFamily" }
+    },
+    "fontSize": {
+      "xs": { "value": "12px", "type": "fontSize" },
+      "sm": { "value": "14px", "type": "fontSize" },
+      "base": { "value": "16px", "type": "fontSize" },
+      "lg": { "value": "18px", "type": "fontSize" },
+      "xl": { "value": "20px", "type": "fontSize" },
+      "2xl": { "value": "24px", "type": "fontSize" },
+      "3xl": { "value": "30px", "type": "fontSize" },
+      "4xl": { "value": "36px", "type": "fontSize" },
+      "5xl": { "value": "48px", "type": "fontSize" }
+    },
+    "fontWeight": {
+      "normal": { "value": "400", "type": "fontWeight" },
+      "medium": { "value": "500", "type": "fontWeight" },
+      "semibold": { "value": "600", "type": "fontWeight" },
+      "bold": { "value": "700", "type": "fontWeight" }
+    }
+  },
+  "breakpoints": {
+    "sm": { "value": "640px", "type": "dimension" },
+    "md": { "value": "768px", "type": "dimension" },
+    "lg": { "value": "1024px", "type": "dimension" },
+    "xl": { "value": "1280px", "type": "dimension" },
+    "2xl": { "value": "1536px", "type": "dimension" }
+  }
+}
