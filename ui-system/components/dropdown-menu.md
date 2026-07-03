@@ -102,7 +102,7 @@
   class="absolute right-0 top-full z-30 mt-2 w-56 rounded-xl bg-white p-1 inset-ring inset-ring-gray-950/8 shadow-lg dark:bg-gray-800 dark:inset-ring-white/10">
   <!-- User Info Header -->
   <div class="px-3 py-2.5">
-    <p class="text-sm font-medium text-gray-900 dark:text-white">Yang Qing</p>
+    <p class="text-sm font-medium text-gray-900 dark:text-white">Raymond Yang</p>
     <p class="text-xs text-gray-500 dark:text-gray-400">yangqing@example.com</p>
   </div>
 

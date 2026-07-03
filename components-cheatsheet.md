@@ -716,14 +716,14 @@
 
 ```html
 <!-- Image Avatar MD -->
-<img src="..." alt="Yang Qing" class="size-10 rounded-full object-cover inset-ring inset-ring-white dark:inset-ring-gray-900">
+<img src="..." alt="Raymond Yang" class="size-10 rounded-full object-cover inset-ring inset-ring-white dark:inset-ring-gray-900">
 
 <!-- Initials Avatar MD -->
-<span class="inline-flex items-center justify-center size-10 rounded-full bg-indigo-600 text-sm font-medium text-white inset-ring inset-ring-white dark:inset-ring-gray-900" aria-label="Yang Qing">YQ</span>
+<span class="inline-flex items-center justify-center size-10 rounded-full bg-indigo-600 text-sm font-medium text-white inset-ring inset-ring-white dark:inset-ring-gray-900" aria-label="Raymond Yang">RY</span>
 
 <!-- With Online Status -->
 <div class="relative inline-flex">
-  <img src="..." alt="Yang Qing" class="size-10 rounded-full object-cover inset-ring inset-ring-white dark:inset-ring-gray-900">
+  <img src="..." alt="Raymond Yang" class="size-10 rounded-full object-cover inset-ring inset-ring-white dark:inset-ring-gray-900">
   <span class="absolute bottom-0 right-0 size-3 rounded-full bg-green-500 inset-ring inset-ring-2 inset-ring-white dark:inset-ring-gray-900" aria-label="Online"></span>
 </div>
 
