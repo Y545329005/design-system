@@ -285,6 +285,21 @@
 
 **反馈规范问题时，必须先打开对应 token 源文件确认引用正确，禁止凭记忆引用不存在的 token 或值。**（示例：声称 `--transition-base` 存在但实际 token 是 `--duration-instant`——先 grep 再写反馈。）
 
+### 5.3 隐私自检（每次提交前必须执行）
+
+- [ ] 页面中无真实姓名（检查 `alt` / `aria-label` / 用户名 / 署名）
+- [ ] 页面中无真实邮箱（`@example.com` 以外的域名）
+- [ ] 页面中无本地绝对路径（`/Users/...`）
+- [ ] 所有占位值来自 `checklists/privacy.md` 占位值表，全仓库一致
+
+**如果发现使用了真实信息，立即替换为占位值，单独 commit（不和其他改动混合）。**
+
+快速自检命令：
+```bash
+grep -rn 'Raymond\|Yang Qing\|yangqing' . --include='*.md' --include='*.html' | grep -v .git
+```
+返回空即通过。
+
 ---
 
 ## 六、文件索引

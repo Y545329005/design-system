@@ -220,9 +220,26 @@ Design System 应该随着项目不断成长。
 
 为了炫酷而增加复杂度。
 
+---
 
+## 九、隐私红线（禁止写入仓库）
 
-## 九、持续改进机制（必须遵守）
+以下信息**永远不可**出现在任何 DS 文件中（含 .md / .html / .css / .json）：
+
+- ❌ 真实姓名（含拼音）—— 组件示例一律使用 `Alex Morgan` / `Jamie Chen` / `Taylor Reed`
+- ❌ 真实邮箱 —— 一律使用 `alex@example.com` 等 @example.com 地址
+- ❌ 本地绝对路径（如 `/Users/xxx/...`）—— 一律使用 `$DESIGN_SYSTEM_ROOT` 或相对路径
+- ❌ 公司名 / 项目内部代号 —— 一律使用 `Acme Corp` / `MySaaS`
+
+**组件示例中的 Avatar 名称、Dropdown 用户名、邮件地址等，必须使用以上占位值。**
+
+这些占位值在 `checklists/privacy.md` 中统一维护，全仓库保持一致。
+
+> 违反此规则的 commit 需单独 revert 并重做，因为 Git 历史会永久保留隐私信息。
+
+---
+
+## 十、持续改进机制（必须遵守）
 
 每完成一个页面，不要直接结束任务。
 
