@@ -2,7 +2,25 @@
 
 > 所有组件的可复制 HTML 代码块汇总。AI 读一个文件即可获取全部组件的全部变体。
 > Light mode 为主，暗色模式在需要时从完整文档补充。
-> 最后更新：2026-07-02 · 27 个组件（Card Footer 正式化）
+> 最后更新：2026-07-03 · 28 个组件
+
+---
+
+## Token 溯源索引
+
+> 每个 class 都能追溯到源 token 文件。反馈 DS 规范问题前，请先对照此表打开源文件确认。
+
+| 组件类别 | 源 Token 文件 | 关键 Token |
+|---------|-------------|-----------|
+| **动效 (duration/transition)** | `motion.md` §二·§四·§九 | `--duration-instant:150ms` (hover) / `--duration-smooth:200ms` (exit) |
+| **表单焦点环** | `elevation.md` §二 Level 2 | `inset-ring-gray-950/20` + `ring-2 ring-gray-950/10`（灰色，非品牌色） |
+| **表单层次** | `elevation.md` §二 Level 1·2·E | Default / Focus / Error / Disabled 四级层次 |
+| **表面层次** | `elevation.md` §二 Level 0·1 | 卡片/Modal `bg-white` + `inset-ring-gray-950/8` |
+| **语义色** | `design-tokens.css` §语义色 | Success/Warning/Error/Info 仅用于状态传达 |
+| **品牌色** | `design-tokens.css` §品牌色 | Indigo 仅用于主按钮、选中态、链接、active 导航项 |
+| **字体/字号** | `typography.md` | 系统字体栈、`text-sm`(14px) UI / `text-base`(16px) 正文 |
+| **圆角** | `design-tokens.css` §圆角 | `rounded-lg`(8px) 交互 / `rounded-xl`(12px) 容器 |
+| **overlay shadow** | `elevation.md` | `shadow-lg`/`shadow-sm` 仅 Dropdown/Tooltip/Modal backdrop |
 
 ---
 
@@ -770,7 +788,7 @@
   </div>
   <div role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
     class="h-2 rounded-full bg-gray-200 dark:bg-gray-700">
-    <div class="h-full rounded-full bg-indigo-600 transition-all duration-300 ease-in-out motion-reduce:transition-none" style="width:60%"></div>
+    <div class="h-full rounded-full bg-indigo-600 transition-[width] duration-300 ease-in-out motion-reduce:transition-none" style="width:60%"></div>
   </div>
 </div>
 
@@ -840,7 +858,33 @@
   <p class="mt-4 text-base text-gray-500 max-w-2xl">Section description.</p>
   <!-- content -->
 </section>
+
+<!-- Page Hero -->
+<div class="rounded-xl bg-gradient-to-br from-indigo-50 to-white dark:from-indigo-950 dark:to-gray-900 inset-ring inset-ring-gray-950/8 dark:inset-ring-white/10 p-6 sm:p-8">
+  <h1 class="text-2xl sm:text-3xl font-semibold tracking-tight text-gray-900 dark:text-gray-100">Page Title</h1>
+  <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">Optional subtitle or description.</p>
+</div>
 ```
+
+---
+
+## 暗色模式变体速查
+
+> 当前 cheatsheet 以 Light mode 为主。以下为高频组件的暗色模式对照表，实际项目中按需添加 `dark:` 前缀变体。
+
+| Light | Dark |
+|-------|------|
+| `bg-white` | `dark:bg-gray-900` |
+| `bg-gray-50` | `dark:bg-gray-950` |
+| `text-gray-900` | `dark:text-gray-100` |
+| `text-gray-700` | `dark:text-gray-300` |
+| `text-gray-500` | `dark:text-gray-400` |
+| `text-gray-400` | `dark:text-gray-500` |
+| `inset-ring-gray-950/8` | `dark:inset-ring-white/10` |
+| `inset-ring-gray-950/20` | `dark:inset-ring-white/20` |
+| `border-gray-950/5` | `dark:border-white/5` |
+| `bg-gray-950/[2.5%]` | `dark:bg-white/[2.5%]` |
+| `bg-gray-200` (Skeleton) | `dark:bg-gray-700` |
 
 ---
 
